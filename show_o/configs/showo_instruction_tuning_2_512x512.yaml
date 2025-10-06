@@ -1,0 +1,104 @@
+wandb:
+  entity: null
+#  run_id: askkz9i2
+  resume: 'auto'
+
+experiment:
+    project: "tuning"
+    name: "show-o-tuning-stage2-512x512"
+    output_dir: "outputs/show-o-tuning-stage2-512x512"
+    max_train_examples_t2i: 129073
+    max_train_examples_mmu: 302672
+    save_every: 10000
+    eval_every: 10000
+    generate_every: 10000
+    log_every: 50
+    log_grad_norm_every: 500
+    resume_from_checkpoint: null
+
+model:
+    vq_model:
+        type: "magvitv2"
+        vq_model_name: "showlab/magvitv2"
+
+    showo:
+        load_from_showo: True
+        pretrained_model_path: "showlab/show-o-512x512"
+        w_clip_vit: False
+        vocab_size: 58498
+        llm_vocab_size: 50295
+        llm_model_path: 'microsoft/phi-1_5'
+        codebook_size: 8192
+        num_vq_tokens: 1024
+        num_new_special_tokens: 10  # <|soi|> <|eoi|> <|sov|> <|eov|> <|t2i|> <|mmu|> <|t2v|> <|v2v|> <|lvg|> <|pad|>
+
+    gradient_checkpointing: True
+
+dataset:
+    gen_type: "t2i"
+    und_type: "llava_tuning"
+    combined_loader_mode: "min_size"
+    add_system_prompt: False
+    params:
+#        train_t2i_shards_path_or_url: ["/mnt/d/PostDoc/fifth paper/related work/DiFashion/datasets/laion2B-en-aesthetic/data/{00000..00040}.tar",
+#        "/mnt/d/PostDoc/fifth paper/related work/DiFashion/datasets/JourneyDB/data/train/imgs/000.tgz"]
+        train_t2i_shards_path_or_url: ["/mnt/d/PostDoc/fifth paper/code/FashionVLM/datasets/FashionRec/data/fashion_image_generation/{000..001}.tar",]
+        train_mmu_shards_path_or_url: ["/mnt/d/PostDoc/fifth paper/code/FashionVLM/datasets/FashionRec/data/basic_recommendation/{000..008}.tar",
+        "/mnt/d/PostDoc/fifth paper/code/FashionVLM/datasets/FashionRec/data/personalized_recommendation/{000..020}.tar",
+        "/mnt/d/PostDoc/fifth paper/code/FashionVLM/datasets/FashionRec/data/alternative_recommendation/000.tar"]
+        train_lm_shards_path_or_url: "/mnt/d/PostDoc/fifth paper/code/FashionVLM/datasets/falcon-refinedweb/data/*.parquet"
+        add_caption_prompt: False
+        external_journeydb_caption_path: ""
+        validation_prompts_file: "validation_prompts/showoprompts.txt"
+        shuffle_buffer_size: 1000
+        num_workers: 1
+        resolution: 512
+        pin_memory: True
+        persistent_workers: True
+
+    preprocessing:
+        max_seq_length: 381 # for text tokens
+#        max_seq_length: 512 # for text tokens
+        resolution: 512
+        center_crop: False
+        random_flip: False
+
+optimizer:
+    name: adamw
+    params: # default adamw params
+        learning_rate: 5e-05
+        scale_lr: False # scale learning rate by total batch size
+        beta1: 0.9
+        beta2: 0.999
+        weight_decay: 0.01
+        epsilon: 1e-8
+
+lr_scheduler:
+    scheduler: "cosine"
+    params:
+        learning_rate: ${optimizer.params.learning_rate}
+        warmup_steps: 1000
+
+training:
+    gradient_accumulation_steps: 1
+    noise_type: "mask"
+    batch_size_t2i: 1
+    batch_size_lm: 1
+    batch_size_mmu: 1
+#    batch_size_t2i: 4
+#    batch_size_lm: 1
+#    batch_size_mmu: 4
+    mixed_precision: "bf16"
+    enable_tf32: True
+    seed: 10086
+    max_train_steps: 300000
+    overfit_one_batch: False
+    cond_dropout_prob: 0.1
+    min_masking_rate: 0.0
+    label_smoothing: 0.0
+    max_grad_norm: null
+    guidance_scale: 0.0
+    generation_timesteps: 12
+    t2i_coeff: 1.0
+    lm_coeff: 0.1
+    mmu_coeff: 1.0

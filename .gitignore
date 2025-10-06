@@ -1,0 +1,62 @@
+# 创建 .gitignore 文件
+echo '# PyCharm
+.idea/
+.vscode/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Output directory
+output/
+Evaluation/
+evaluate/compatibility_net.pth
+DiFashion/
+
+datasets
+datasets/
+
+# dataset
+datasets/ifashion/all_item_image_paths.npy
+datasets/ifashion/cnn_features_clip.npy
+datasets/ifashion/download_corrupted_img.py
+datasets/ifashion/download_img.py
+datasets/ifashion/download_logs/
+datasets/ifashion/ifashion.rar
+datasets/ifashion/image/
+datasets/ifashion/item_info.npy
+datasets/ifashion/preprocess_img.py
+datasets/ifashion/preprocessed_image/
+datasets/ifashion/processed/
+datasets/wandb/
+datasets/laion2B-en-aesthetic/
+datasets/FashionRec/
+
+datasets/polyvore/all_item_image_paths.npy
+datasets/polyvore/cnn_features_clip.npy
+datasets/polyvore/image/
+datasets/polyvore/polyvore.rar
+datasets/polyvore/processed/
+datasets/polyvore/temp
+datasets/polyvore/all_item_image_descriptions.npy
+datasets/polyvore/instruct/
+
+datasets/falcon-refinedweb
+
+datasets/llava-instruct-150k/
+datasets/llava-pretrain/
+
+datasets/JourneyDB/
+datasets/LAION-Aesthetics-V2-6.5plus/
+datasets/fashion_product_image_small_44k/
+datasets/fashion_product_image_44k/
+
+show_o/wandb/
+show_o/configs_docker/.ipynb_checkpoints/
+show_o/outputs/
+show_o/preparing_data/describe_item_via_llama.py
+
+run_multiple.py
+entrypoint.sh
+Dockerfile
