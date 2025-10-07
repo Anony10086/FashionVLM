@@ -1,2 +1,3 @@
 [submodule "llava_next"]
 	path = llava_next
+	url = https://github.com/Anony10086/LLaVA-NeXT.git
