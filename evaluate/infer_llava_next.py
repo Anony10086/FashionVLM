@@ -22,7 +22,7 @@ parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
 parser.add_argument('--model', type=str, default='0.5b-si', help='model name: llava_onevision_05b_si | llava_onevision_7b_ov | llava_onevision_7b_ov_chat')
-parser.add_argument('--root-dir ', type=str, default='/mnt/d/PostDoc/fifth paper/code/FashionVLM', help='root directory of FashionVLM code')
+# parser.add_argument('--root-dir', type=str, default='/mnt/d/PostDoc/fifth paper/code/FashionVLM', help='root directory of FashionVLM code')
 args = parser.parse_args()
 
 
@@ -30,7 +30,7 @@ args = parser.parse_args()
 #######################################
 ##############Loading Data#############
 #######################################
-data_set_root = f"{args.root_dir}/datasets/FashionRec/data"
+data_set_root = "./datasets/FashionRec/data"
 dataset = FashionRecDatasetBase(
     tar_files=f"{data_set_root}/{args.task}/test/000.tar",
     num_examples=500
@@ -78,7 +78,7 @@ batched_indices = []
 for idx, (image, json_data) in enumerate(tqdm(dataset)):
     index = json_data['key']
     conversation = json_data['conversation']
-    img_path = f'{args.root_dir}/datasets/FashionRec/data/basic_recommendation/test/temp/{index}.jpg'
+    img_path = f'./datasets/FashionRec/data/basic_recommendation/test/temp/{index}.jpg'
     image = Image.open(img_path)
     
     conv_template = "qwen_1_5"  # Make sure you use correct chat template for different models

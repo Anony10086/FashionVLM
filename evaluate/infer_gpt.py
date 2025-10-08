@@ -15,7 +15,7 @@ parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--model', type=str, default='gpt-4o', help='gpt model choice: o4-mini | o3-mini | gpt-4o | gpt-4.1')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
-parser.add_argument('--root-dir ', type=str, default='/mnt/d/PostDoc/fifth paper/code/FashionVLM', help='root directory of FashionVLM code')
+parser.add_argument('--root-dir', type=str, default='/mnt/d/PostDoc/fifth paper/code/FashionVLM', help='root directory of FashionVLM code')
 args = parser.parse_args()
 
 
