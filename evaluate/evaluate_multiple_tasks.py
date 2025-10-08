@@ -15,9 +15,6 @@ from torchvision.transforms.functional import to_pil_image, InterpolationMode
 
 from metric import CLIPScore, SentenceBertScore, CompatibilityScore, ResizeSquareImage, ConvertRGB
 
-# os.environ["HTTP_PROXY"] = "http://127.0.0.1:10809"
-# os.environ["HTTPS_PROXY"] = "http://127.0.0.1:10809"
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--method', type=str, default='fashion_vlm',

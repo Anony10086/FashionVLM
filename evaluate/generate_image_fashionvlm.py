@@ -1,4 +1,6 @@
 import os
+import sys
+sys.path.append(os.getcwd())
 from functools import partial
 from tqdm import tqdm
 import argparse

@@ -1,9 +1,4 @@
 #!/bin/bash
-
-
-# Change to you own FashionVLM root directory
-export ROOT = "/mnt/d/PostDoc/fifth paper/code/FashionVLM"  # "/mnt/d/PostDoc/fifth paper/code/FashionVLM" | "/home/pkc/workspace/FashionVLM"
-
 # 取消代理设置
 unset http_proxy
 unset https_proxy
