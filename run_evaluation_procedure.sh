@@ -15,7 +15,7 @@ echo "=================================================="
 
 # 1. basic_recommendation 任务
 echo "1.1. Using $METHOD_NAME basic_recommendation to recommend"
-python3 evaluate/infer_llava_next.py --model $METHOD_NAME --task basic_recommendation --root "$PWD"
+python3 evaluate/infer_llava_next.py --model $METHOD_NAME --task basic_recommendation
 echo "1.2. Generating $METHOD_NAME basic_recommendation Image"
 python3 evaluate/generate_image_fashionvlm.py --method $METHOD_NAME --task basic_recommendation
 echo "1.3. Evaluating $METHOD_NAME on basic_recommendation"

@@ -26,7 +26,6 @@ parser.add_argument('--method', type=str, default='fashion_vlm',
 parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
-parser.add_argument('--root-dir', type=str, default='/mnt/d/PostDoc/fifth paper/code/FashionVLM', help='root directory of FashionVLM code')
 args = parser.parse_args()
 
 
@@ -113,7 +112,7 @@ def collate_fn(batch, uni_prompting=None, img_tokenizer=None):
 #######################################
 #############Loading Model#############
 #######################################
-config = OmegaConf.load(f"{args.root_dir}/show_o/outputs/FashionVLM-2025-03-30/config_infer.yaml")
+config = OmegaConf.load(f"./show_o/outputs/FashionVLM-2025-03-30/config_infer.yaml")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Init Universal Prompting
@@ -153,7 +152,7 @@ fashion_vlm.eval()
 #######################################
 ##############Loading Data#############
 #######################################
-data_set_root = f"{args.root_dir}/datasets/FashionRec/data"
+data_set_root = f"./datasets/FashionRec/data"
 
 dataset = EvalDataset(
     tar_files=f"{data_set_root}/{args.task}/test/000.tar",
@@ -199,7 +198,7 @@ total_time = end_time - start_time  # 总时间（包括后处理）
 print(f"Total Cost Time: {total_time:.2f} seconds")
 print(f"Average Batch Latency: {total_time / (len(dataset) + 1):.2f} seconds")
 
-save_dir = f"{args.root_dir}/output/{args.method}"
+save_dir = f"./output/{args.method}"
 os.makedirs(save_dir, exist_ok=True)
 with open(f"{save_dir}/{args.task}_results.json", "w") as f:
     json.dump(results, f, indent=2)

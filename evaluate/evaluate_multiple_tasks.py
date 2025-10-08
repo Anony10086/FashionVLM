@@ -25,7 +25,6 @@ parser.add_argument('--method', type=str, default='fashion_vlm',
 parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
-parser.add_argument('--root-dir', type=str, default='/mnt/d/PostDoc/fifth paper/code/FashionVLM', help='root directory of FashionVLM code')
 args = parser.parse_args()
 
 
@@ -133,17 +132,17 @@ def collect_fn(batch):
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 clip_metric = CLIPScore()
 bert_metric = SentenceBertScore()
-# comp_metric = CompatibilityScore(model_path=f'{args.root_dir}/evaluate/compatibility_net.pth')
+# comp_metric = CompatibilityScore(model_path=f'./evaluate/compatibility_net.pth')
 
 ###############################
 ##########LOAD DATA############
 ###############################
-dataset_dir = os.path.join(args.root_dir, f'datasets/FashionRec/data/{args.task}/{args.split}')
+dataset_dir = f'datasets/FashionRec/data/{args.task}/{args.split}'
 if args.method in ['gpt_4o', 'o3_mini', 'o4_mini', 'gpt_4.1']:
     json_file_name = f"{args.task}_results.jsonl"
 else:
     json_file_name = f"{args.task}_results.json"
-inference_dir = os.path.join(args.root_dir, f'output/{args.method}')
+inference_dir = f'output/{args.method}'
 
 eval_dataset = FashionRecEvalDataset(
     dataset_dir=dataset_dir, json_file_name=json_file_name,

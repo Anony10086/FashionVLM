@@ -24,7 +24,6 @@ parser.add_argument('--method', type=str, default='fashion_vlm',
 parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
-parser.add_argument('--root-dir', type=str, default='/mnt/d/PostDoc/fifth paper/code/FashionVLM', help='root directory of FashionVLM code')
 args = parser.parse_args()
 
 
@@ -89,7 +88,7 @@ def collate_fn(batch, uni_prompting=None):
 #######################################
 #############Loading Model#############
 #######################################
-config = OmegaConf.load(f"{args.root_dir}/show_o/outputs/FashionVLM-2025-03-30/config_infer.yaml")
+config = OmegaConf.load(f"./show_o/outputs/FashionVLM-2025-03-30/config_infer.yaml")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Init Universal Prompting
@@ -128,7 +127,7 @@ fashion_vlm.eval()
 #######################################
 ##############Loading Data#############
 #######################################
-result_dir = f"{args.root_dir}/output/{args.method}"
+result_dir = f"./output/{args.method}"
 if args.method in ['gpt_4o', 'o3_mini', 'o4_mini', 'gpt_4.1']:
     json_file_name = f"{args.task}_results.jsonl"
 else:

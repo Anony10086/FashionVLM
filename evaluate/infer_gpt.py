@@ -15,7 +15,6 @@ parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--model', type=str, default='gpt-4o', help='gpt model choice: o4-mini | o3-mini | gpt-4o | gpt-4.1')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
-parser.add_argument('--root-dir', type=str, default='/mnt/d/PostDoc/fifth paper/code/FashionVLM', help='root directory of FashionVLM code')
 args = parser.parse_args()
 
 
@@ -51,7 +50,7 @@ def pil_to_base64(image, format="PNG"):
 #######################################
 ##############Loading Data#############
 #######################################
-data_set_root = f"{args.root_dir}/datasets/FashionRec/data"
+data_set_root = f"./datasets/FashionRec/data"
 dataset = FashionRecDatasetBase(
     tar_files=f"{data_set_root}/{args.task}/test/000.tar",
     num_examples=500
@@ -126,7 +125,7 @@ for idx, (image, json_data) in enumerate(tqdm(dataset)):
     }
     batch_samples.append(request_sample)
 
-save_dir = f"{args.root_dir}/output/{args.model.replace('-', '_')}"
+save_dir = f"./output/{args.model.replace('-', '_')}"
 os.makedirs(save_dir, exist_ok=True)
 with open(f"{save_dir}/{args.task}_requests.jsonl", "w") as f:
     for request_sample in batch_samples:
