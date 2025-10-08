@@ -83,8 +83,8 @@ class ConvertRGB(torch.nn.Module):
 
 class CLIPScore:
     def __init__(self, device='cuda' if torch.cuda.is_available() else 'cpu'):
-        self.model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32", local_files_only=True)
-        self.processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32", local_files_only=True)
+        self.model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+        self.processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
         self.device = device
         self.model.to(device)
         self.model.eval()

@@ -53,8 +53,8 @@ image_paths = items_df["path"].to_dict()
 ###################################
 # Load CLIP model and processor
 print("Loading CLIP Model")
-clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32", local_files_only=True)
-clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32", local_files_only=True)
+clip_model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
+clip_processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 clip_model.eval()
 
 print("Loading Fashion VLM params")

@@ -97,7 +97,6 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 tokenizer = AutoTokenizer.from_pretrained(
     config.model.showo.llm_model_path,
     padding_side="left",
-    local_files_only=True
 )
 uni_prompting = UniversalPrompting(
     tokenizer,
