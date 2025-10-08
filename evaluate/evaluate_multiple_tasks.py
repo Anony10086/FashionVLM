@@ -5,6 +5,7 @@ from tqdm import tqdm
 import pandas as pd
 import pickle
 import numpy as np
+import tarfile
 
 import torch
 from PIL import Image
@@ -61,14 +62,26 @@ class FashionRecEvalDataset(Dataset):
                     index = data['custom_id'].split('-')[-1]
                     response = data['response']['body']['choices'][0]['message']['content']
                     self.results.append((index, response))
+        
+        self._load_tar_files(os.path.join(dataset_dir, '000.tar'))
+
+    def _load_tar_files(self, tar_path: str):
+        self.jsons = {}
+        with tarfile.open(tar_path, "r") as tar:
+            for member in tar.getmembers():
+                if member.isfile():
+                    filename = os.path.basename(member.name)  # get 0009741.json
+                    base_name = os.path.splitext(filename)[0]  # get 0009741
+                    if member.name.endswith(".json"):
+                        with tar.extractfile(member) as json_file:
+                            self.jsons[base_name] = json.loads(json_file.read().decode("utf-8"))
 
     def __getitem__(self, idx):
         result = self.results[idx]
         index = result[0]
 
         # Loading Ground Truth Data
-        with open(os.path.join(self.dataset_dir, 'temp', f'{index}.json'), 'r') as f:
-            json_data = json.load(f)
+        json_data = self.jsons[index]
 
         pred_text = result[1]
         targ_text = json_data['conversation'][-1]['value']

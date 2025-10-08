@@ -46,7 +46,6 @@ class FashionRecDatasetBase(Dataset):
     def _load_tar_files(self, tar_path: str, num_examples: int):
         self.images = []
         self.jsons = []
-        self.index = []
         with tarfile.open(tar_path, "r") as tar:
             for member in tar.getmembers():
                 if member.isfile():
