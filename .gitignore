@@ -12,6 +12,7 @@ __pycache__/
 output/
 Evaluation/
 evaluate/compatibility_net.pth
+evaluate/infer_difashion.py
 DiFashion/
 
 datasets

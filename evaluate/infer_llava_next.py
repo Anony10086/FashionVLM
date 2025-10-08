@@ -77,8 +77,6 @@ batched_indices = []
 for idx, (image, json_data) in enumerate(tqdm(dataset)):
     index = json_data['key']
     conversation = json_data['conversation']
-    img_path = f'./datasets/FashionRec/data/basic_recommendation/test/temp/{index}.jpg'
-    image = Image.open(img_path)
     
     conv_template = "qwen_1_5"  # Make sure you use correct chat template for different models
     question = DEFAULT_IMAGE_TOKEN + json_data['conversation'][0]['value']

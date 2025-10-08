@@ -3,6 +3,7 @@ from tqdm import tqdm
 import json
 import time
 import argparse
+import tarfile
 
 import ollama
 
@@ -25,6 +26,23 @@ dataset = FashionRecDatasetBase(
     tar_files=f"{data_set_root}/{args.task}/test/000.tar",
     num_examples=500
 )
+# Extract and save images for ollama
+temp_dir = f"{data_set_root}/{args.task}/test/temp" 
+if os.path.exists(temp_dir) and os.listdir(temp_dir):
+    print(f"Directory {temp_dir} already exists and is not empty. Skipping extraction.")
+
+os.makedirs(temp_dir, exist_ok=True)
+print(f"Extracting {f"{data_set_root}/{args.task}/test/000.tar"} to {temp_dir}...")
+try:
+    with tarfile.open(f"{data_set_root}/{args.task}/test/000.tar", 'r') as tar:
+        tar.extractall(path=temp_dir)
+    print("Extraction complete.")
+except Exception as e:
+    print(f"Error during extraction: {e}")
+    import shutil
+    shutil.rmtree(temp_dir)
+    raise
+
 
 
 #######################################
