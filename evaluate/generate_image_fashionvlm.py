@@ -90,7 +90,7 @@ def collate_fn(batch, uni_prompting=None):
 #######################################
 #############Loading Model#############
 #######################################
-config = OmegaConf.load(f"./show_o/outputs/FashionVLM-2025-03-30/config_infer.yaml")
+config = OmegaConf.load(f"./show_o/configs/showo_fashionrec_tuning_3_512x512.yaml")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Init Universal Prompting
@@ -110,20 +110,16 @@ uni_prompting = UniversalPrompting(
 
 # Init VQ model
 print("Loading VQ model")
-vq_model = MAGVITv2.from_pretrained(config.model.vq_model.vq_model_name, local_files_only=True).to(device)
+vq_model = MAGVITv2.from_pretrained(config.model.vq_model.vq_model_name).to(device)
 vq_model.requires_grad_(False)
 vq_model.eval()
 
 # Loading Fashion VLM
 print("Loading Image Generation Model params")
 if args.method in ["show_o", "show_o_ablation"]:
-    fashion_vlm = Showo.from_pretrained(config.model.showo.pretrained_model_path, local_files_only=True).to(device)
+    fashion_vlm = Showo.from_pretrained(config.model.showo.pretrained_model_path).to(device)
 else:
-    fashion_vlm = Showo(**config.model.showo).to(device)
-    path = os.path.join(config.experiment.output_dir, "pytorch_model.bin")
-    print(f"Resuming from checkpoint {path}")
-    state_dict = torch.load(path, map_location=device)
-    fashion_vlm.load_state_dict(state_dict, strict=False)
+    fashion_vlm = Showo.from_pretrained("Anony100/FashionVLM").to(device)
 fashion_vlm.eval()
 
 #######################################

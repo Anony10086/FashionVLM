@@ -10,7 +10,7 @@ cd FashionVLM
 pip install -r requirements.txt
 ```
 
-
+## Evaluation
 ```
 cd llava_next
 git submodule update --init --recursive

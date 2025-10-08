@@ -59,7 +59,7 @@ clip_model.eval()
 
 print("Loading Fashion VLM params")
 fashion_vlm = ShowoModel(
-    config="/mnt/d/PostDoc/fifth paper/code/FashionVLM/show_o/outputs/FashionVLM-2025-03-30/config_infer.yaml",
+    config="/mnt/d/PostDoc/fifth paper/code/FashionVLM/show_o/configs/showo_fashionrec_tuning_3_512x512.yaml",
     max_new_tokens=1000,
     temperature=0.8,
     top_k=1,

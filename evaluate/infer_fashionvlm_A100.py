@@ -106,7 +106,7 @@ def collate_fn(batch, uni_prompting=None, img_tokenizer=None):
 #######################################
 #############Loading Model#############
 #######################################
-config = OmegaConf.load("/mnt/d/PostDoc/fifth paper/code/FashionVLM/show_o/outputs/FashionVLM-2025-03-30/config_infer.yaml")
+config = OmegaConf.load("/mnt/d/PostDoc/fifth paper/code/FashionVLM/show_o/configs/showo_fashionrec_tuning_3_512x512.yaml")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Init Universal Prompting
