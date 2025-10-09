@@ -1,8 +1,5 @@
 #!/bin/bash
-# 取消代理设置
-unset http_proxy
-unset https_proxy
-
+export PYTHONPATH="$(pwd):$PYTHONPATH"
 # 定义模型方法变量
 export METHOD_NAME='llava_onevision_7b_ov_chat_finetune'  # "llava_onevision_7b_ov_chat_finetune" | "llava_onevision_05b_si_finetune"
 
@@ -14,14 +11,10 @@ for TASK_NAME in "${TASKS[@]}"; do
     echo "--- Starting Task: $TASK_NAME ---"
     
     # 1. Infer/Recommend
-    export http_proxy=http://127.0.0.1:10809
-    export https_proxy=http://127.0.0.1:10809
     echo "${i}.1. Using $METHOD_NAME $TASK_NAME to recommend"
-    python3 evaluate/infer_fashionvlm_mmu.py --method "$METHOD_NAME" --task "$TASK_NAME"
+    python3 evaluate/infer_llava_next.py --method "$METHOD_NAME" --task "$TASK_NAME"
     
     # 2. Generate Image
-    unset http_proxy
-    unset https_proxy
     echo "${i}.2. Generating $METHOD_NAME $TASK_NAME Image"
     python3 evaluate/generate_image_fashionvlm.py --method "$METHOD_NAME" --task "$TASK_NAME"
     

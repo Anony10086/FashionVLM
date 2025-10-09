@@ -1,6 +1,4 @@
 #!/bin/bash
-# 取消代理设置
-
 export PYTHONPATH="$(pwd):$PYTHONPATH"
 
 # 定义模型方法变量
