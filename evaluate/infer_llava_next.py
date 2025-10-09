@@ -45,9 +45,9 @@ if args.model == 'llava_onevision_7b_ov_chat':
 elif args.model == 'llava_onevision_05b_si':
     pretrained = "lmms-lab/llava-onevision-qwen2-0.5b-si"
 elif args.model == 'llava_onevision_7b_ov_chat_finetune':
-    pretrained = "Anony100/llava-onevision-7b-ov-fashionrec"
+    pretrained = "Anony100/llava-onevision-7b-ov-fashionrec" if not os.path.exists("llava_next/output/llava-onevision-google_siglip-so400m-patch14-384-Qwen_Qwen2-7B-Instruct-ov_stage_fashionrec") else "llava_next/output/llava-onevision-google_siglip-so400m-patch14-384-Qwen_Qwen2-7B-Instruct-ov_stage_fashionrec"
 elif args.model == 'llava_onevision_05b_si_finetune':
-    pretrained = "Anony100/llava-onevision-0.5b-si-fashionrec"
+    pretrained = "Anony100/llava-onevision-0.5b-si-fashionrec" if not os.path.exists("llava_next/output/llava-onevision-google_siglip-so400m-patch14-384-Qwen_Qwen2-7B-Instruct-si_stage_fashionrec") else "llava_next/output/llava-onevision-google_siglip-so400m-patch14-384-Qwen_Qwen2-7B-Instruct-si_stage_fashionrec"
 else:
     raise ValueError("Model not supported.")
 
