@@ -95,7 +95,7 @@ class FashionRecEvalDataset(Dataset):
         else:
             targ_item = json_data['target_items'][-1]
 
-        targ_img_path = os.path.join('./datasets/FashionRec/data/item_images', targ_item['item_id'] + ',jpg')
+        targ_img_path = os.path.join('./datasets/FashionRec/data/item_images', targ_item['item_id'] + '.jpg')
         targ_image = Image.open(targ_img_path).convert('RGB')
         # targ_image = self.clip_transform(targ_image)
 

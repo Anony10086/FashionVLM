@@ -31,6 +31,7 @@ git clone https://huggingface.co/datasets/Anony100/FashionRec
 ```
 cd llava_next
 git submodule update --init --recursive
+git checkout fashionvlm
 pip install --upgrade pip  # Enable PEP 660 support.
 pip install -e .
 

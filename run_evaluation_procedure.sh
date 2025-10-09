@@ -2,9 +2,10 @@
 # 取消代理设置
 unset http_proxy
 unset https_proxy
+ollama serve
 
 # 定义模型方法变量
-export METHOD_NAME='llava_onevision_05b_si'
+export METHOD_NAME='llava_onevision_7b_ov_chat_finetune'  # "llava_onevision_7b_ov_chat_finetune" | "llava_onevision_05b_si_finetune"
 
 echo "=================================================="
 
