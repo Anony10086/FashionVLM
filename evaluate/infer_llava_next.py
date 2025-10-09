@@ -40,12 +40,14 @@ dataset = FashionRecDatasetBase(
 #############Loading Model#############
 #######################################
 warnings.filterwarnings("ignore")
-if args.model == 'llava_onevision_7b_ov':
-    pretrained = "lmms-lab/llava-onevision-qwen2-7b-ov"
-elif args.model == 'llava_onevision_7b_ov_chat':
+if args.model == 'llava_onevision_7b_ov_chat':
     pretrained = "lmms-lab/llava-onevision-qwen2-7b-ov-chat"
 elif args.model == 'llava_onevision_05b_si':
     pretrained = "lmms-lab/llava-onevision-qwen2-0.5b-si"
+elif args.model == 'llava_onevision_7b_ov_chat_finetune':
+    pretrained = "Anony100/llava-onevision-7b-ov-fashionrec"
+elif args.model == 'llava_onevision_05b_si_finetune':
+    pretrained = "Anony100/llava-onevision-0.5b-si-fashionrec"
 else:
     raise ValueError("Model not supported.")
 
