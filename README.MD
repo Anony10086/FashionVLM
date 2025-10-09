@@ -1,43 +1,46 @@
 This document records how to reproduce the results in Table III
 
 ## Code preparation
-```
-conda create -n fashionvlm python=3.10 -y
-conda activate fashionvlm
-```
-
-```
+```bash
 git clone https://github.com/Anony10086/FashionVLM.git
 cd FashionVLM
+
+conda create -n fashionvlm python=3.10 -y
+conda activate fashionvlm
 pip install -r requirements.txt
 ```
 
 ## Start Ollama Server
-```
+```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ollama serve
 ollama pull phi4
 ```
 
 ## Data preparation
-```
+```bash
 mkdir datasets
+cd datasets
 git clone https://huggingface.co/datasets/Anony100/FashionRec
+
+# unizp the item image to evaluate the performance. Training phrase is not necessary.
+tar -xzvf item_images.tar.gz -C FashionRec/data
 ```
 
 
 ## Evaluation
-### Evaluate performance of LLaVA-Next-1.6
+### Evaluate performance of FashionVLM
+```bash
+bash evaluate_fashionvlm.sh
 ```
+
+### Evaluate performance of LLaVA-Next-1.6
+```bash
 cd llava_next
 git submodule update --init --recursive
 git checkout fashionvlm
 pip install --upgrade pip  # Enable PEP 660 support.
 pip install -e .
 
-export METHOD_NAME='llava_onevision_05b_si'
-export TASK='basic_recommendation'  # please change the task to personalized_recommendation or alternative_recommendation
-python3 evaluate/infer_llava_next.py --model $METHOD_NAME --task $TASK
-python3 evaluate/generate_image_fashionvlm.py --method $METHOD_NAME --task $TASK
-python3 evaluate/evaluate_multiple_tasks.py --method $METHOD_NAME --task $TASK
+bash evaluate_llava.sh
 ```

@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
-parser.add_argument('--model', type=str, default='0.5b-si', help='model name: llava_onevision_05b_si | llava_onevision_7b_ov | llava_onevision_7b_ov_chat')
+parser.add_argument('--method', type=str, default='0.5b-si', help='model name: llava_onevision_05b_si | llava_onevision_7b_ov | llava_onevision_7b_ov_chat')
 args = parser.parse_args()
 
 
@@ -40,13 +40,13 @@ dataset = FashionRecDatasetBase(
 #############Loading Model#############
 #######################################
 warnings.filterwarnings("ignore")
-if args.model == 'llava_onevision_7b_ov_chat':
+if args.method == 'llava_onevision_7b_ov_chat':
     pretrained = "lmms-lab/llava-onevision-qwen2-7b-ov-chat"
-elif args.model == 'llava_onevision_05b_si':
+elif args.method == 'llava_onevision_05b_si':
     pretrained = "lmms-lab/llava-onevision-qwen2-0.5b-si"
-elif args.model == 'llava_onevision_7b_ov_chat_finetune':
+elif args.method == 'llava_onevision_7b_ov_chat_finetune':
     pretrained = "Anony100/llava-onevision-7b-ov-fashionrec" if not os.path.exists("llava_next/output/llava-onevision-google_siglip-so400m-patch14-384-Qwen_Qwen2-7B-Instruct-ov_stage_fashionrec") else "llava_next/output/llava-onevision-google_siglip-so400m-patch14-384-Qwen_Qwen2-7B-Instruct-ov_stage_fashionrec"
-elif args.model == 'llava_onevision_05b_si_finetune':
+elif args.method == 'llava_onevision_05b_si_finetune':
     pretrained = "Anony100/llava-onevision-0.5b-si-fashionrec" if not os.path.exists("llava_next/output/llava-onevision-google_siglip-so400m-patch14-384-Qwen_Qwen2-7B-Instruct-si_stage_fashionrec") else "llava_next/output/llava-onevision-google_siglip-so400m-patch14-384-Qwen_Qwen2-7B-Instruct-si_stage_fashionrec"
 else:
     raise ValueError("Model not supported.")
@@ -148,7 +148,7 @@ total_time = end_time - start_time  # 总时间（包括后处理）
 print(f"Total Cost Time: {total_time:.2f} seconds")
 print(f"Average Batch Latency: {total_time / (len(dataset) + 1):.2f} seconds")
 
-output_dir = args.model
+output_dir = args.method
 
 save_dir = f"./output/{output_dir}"
 os.makedirs(save_dir, exist_ok=True)
