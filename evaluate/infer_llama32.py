@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
-parser.add_argument('--model', type=str, default='llama32', help='model name: llama3.2-vision | llava:v1.6')
+parser.add_argument('--method', type=str, default='llama32', help='model name: llama3.2-vision | llava:v1.6')
 args = parser.parse_args()
 
 
@@ -80,7 +80,7 @@ for idx, (image, json_data) in enumerate(tqdm(dataset)):
                 }
             )
     response = ollama.chat(
-        model=args.model,
+        model=args.method,
         messages=messages
     )
     text = response['message']['content']
@@ -91,9 +91,9 @@ total_time = end_time - start_time  # 总时间（包括后处理）
 print(f"Total Cost Time: {total_time:.2f} seconds")
 print(f"Average Batch Latency: {total_time / (len(dataset) + 1):.2f} seconds")
 
-if args.model == 'llama3.2-vision':
+if args.method == 'llama3.2-vision':
     output_dir = 'llama_32'
-elif args.model == 'llava:v1.6':
+elif args.method == 'llava:v1.6':
     output_dir = 'llava_16'
 else:
     raise ValueError

@@ -31,10 +31,16 @@ tar -xzvf item_images.tar.gz -C FashionRec/data
 ## Evaluation
 ### Evaluate performance of FashionVLM
 ```bash
-bash evaluate_fashionvlm.sh
+bash evaluate_fashionvlm.sh fashion_vlm
 ```
 
-### Evaluate performance of LLaVA-Next-1.6
+### Evaluate performance of Show-o
+```bash
+bash evaluate_fashionvlm.sh show_o
+```
+
+
+### Evaluate performance of LLaVA-1.6
 ```bash
 cd llava_next
 git submodule update --init --recursive
@@ -42,5 +48,18 @@ git checkout fashionvlm
 pip install --upgrade pip  # Enable PEP 660 support.
 pip install -e .
 
-bash evaluate_llava.sh
+bash evaluate_llava.sh llava_onevision_05b_si
+bash evaluate_llava.sh llava_onevision_7b_ov_chat
+bash evaluate_llava.sh llava_onevision_05b_si_finetune
+bash evaluate_llava.sh llava_onevision_7b_ov_chat_finetune
+```
+
+### Evaluate performance of GPT series
+```bash
+bash evaluate_gpt.sh gpt-4.1
+```
+
+### Evaluate performance of llama-3.2
+```bash
+bash evaluate_llama.sh
 ```

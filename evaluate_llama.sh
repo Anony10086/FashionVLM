@@ -1,10 +1,5 @@
 #!/bin/bash
-if [ -z "$1" ]; then
-    echo "Usage: $0 <METHOD_NAME>"
-    echo "Available methods: fashion_vlm | show_o"
-    exit 1
-fi
-export METHOD_NAME="$1"
+export METHOD_NAME="llama3.2-vision"
 export PYTHONPATH="$(pwd):$PYTHONPATH"
 
 TASKS=("basic_recommendation" "personalized_recommendation" "alternative_recommendation")
@@ -16,7 +11,7 @@ for TASK_NAME in "${TASKS[@]}"; do
     
     # 1. Infer/Recommend
     echo "${i}.1. Using $METHOD_NAME $TASK_NAME to recommend"
-    python3 evaluate/infer_fashionvlm_mmu.py --method "$METHOD_NAME" --task "$TASK_NAME"
+    python3 evaluate/infer_gpt.py --method "$METHOD_NAME" --task "$TASK_NAME"
     
     # 2. Generate Image
     echo "${i}.2. Generating $METHOD_NAME $TASK_NAME Image"

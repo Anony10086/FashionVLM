@@ -1,10 +1,15 @@
 #!/bin/bash
+if [ -z "$1" ]; then
+    echo "Usage: $0 <METHOD_NAME>"
+    echo "Available methods: llava_onevision_05b_si | llava_onevision_7b_ov_chat | llava_onevision_05b_si_finetune | llava_onevision_7b_ov_chat_finetune"
+    exit 1
+fi
+export METHOD_NAME="$1"
+
 export PYTHONPATH="$(pwd):$PYTHONPATH"
 # 定义模型方法变量
-export METHOD_NAME='llava_onevision_7b_ov_chat_finetune'  # "llava_onevision_7b_ov_chat_finetune" | "llava_onevision_05b_si_finetune"
 
 TASKS=("basic_recommendation" "personalized_recommendation" "alternative_recommendation")
-
 echo "=================================================="
 i=1
 for TASK_NAME in "${TASKS[@]}"; do

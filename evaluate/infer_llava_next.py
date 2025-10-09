@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--task', type=str, default='basic_recommendation',
                     help='task name, basic_recommendation | personalized_recommendation | alternative_recommendation')
 parser.add_argument('--split', type=str, default='test', help='split of dataset, test | valid')
-parser.add_argument('--method', type=str, default='0.5b-si', help='model name: llava_onevision_05b_si | llava_onevision_7b_ov | llava_onevision_7b_ov_chat')
+parser.add_argument('--method', type=str, default='0.5b-si', help='model name: llava_onevision_05b_si | llava_onevision_7b_ov_chat | llava_onevision_05b_si_finetune | llava_onevision_7b_ov_chat_finetune')
 args = parser.parse_args()
 
 
