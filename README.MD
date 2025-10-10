@@ -24,7 +24,8 @@ cd datasets
 git clone https://huggingface.co/datasets/Anony100/FashionRec
 
 # unizp the item image to evaluate the performance. Training phrase is not necessary.
-tar -xzvf item_images.tar.gz -C FashionRec/data
+cd FashionRec/data
+tar -xzvf item_images.tar.gz
 ```
 
 
